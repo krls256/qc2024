@@ -65,11 +65,14 @@ func step(allQubits []q.Qubit, simulator *q.Q, secretFunc func([]q.Qubit) []q.Qu
 	}
 
 	// Part 3 on my doc image
-	simulator.H(allQubits...)
-	simulator.X(allQubits...)
-	simulator.H(qLast).ControlledNot(allQubits[:len(allQubits)-1], qLast).H(qLast)
-	simulator.X(allQubits...)
-	simulator.H(allQubits...)
+	simulator.
+		H(allQubits...).
+		X(allQubits...).
+		H(qLast).
+		ControlledNot(allQubits[:len(allQubits)-1], qLast).
+		H(qLast).
+		X(allQubits...).
+		H(allQubits...)
 }
 
 func NewSecretFunc(secret uint) func([]q.Qubit) []q.Qubit {
